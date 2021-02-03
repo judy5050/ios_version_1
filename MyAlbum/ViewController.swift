@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var priceLable: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        priceLable.text="₩ \(currentValue)"
+        refresh()
         // Do any additional setup after loading the view.
     }
 
@@ -23,18 +23,20 @@ class ViewController: UIViewController {
         
         let alert=UIAlertController(title:"Hello",message: message,preferredStyle: .alert)
         
-        let action=UIAlertAction(title: "OK", style:.default, handler: nil)
+        let action=UIAlertAction(title: "OK", style:.default, handler: {action in self.refresh()})
 
         alert.addAction(action)
         present(alert,animated: true,completion: nil)
-        
-       let randomPrice = arc4random_uniform(10000)+1
-        currentValue = Int(randomPrice)
-        priceLable.text="₩ \(currentValue)"
+    
+      
     }
     
-    
 
+    func refresh(){
+        let randomPrice = arc4random_uniform(10000)+1
+         currentValue = Int(randomPrice)
+         priceLable.text="₩ \(currentValue)"
+    }
     
 }
 
